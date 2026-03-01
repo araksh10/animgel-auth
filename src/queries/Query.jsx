@@ -21,8 +21,10 @@ export const USER_ADD = gql`
 `;
 
 export const USER_LOGIN = gql`
-    mutation userLogin($email: String!, $password: String!) {
+    mutation userLogIn($email: String!, $password: String!) {
         userLogIn(email: $email, password: $password) {
+            success
+            message
             id
             name
             username

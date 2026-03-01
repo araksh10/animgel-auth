@@ -22,10 +22,10 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            if (formLI.email === "" || formLI.password !== "") {
-                return alert("Please enter valid information");
+            if (formLI.email === "" || formLI.password === "") {
+                return alert("Please enter valid information!");
             }
-            await userLogIn({
+            const result = await userLogIn({
                 variables: {
                     email: formLI.email,
                     password: formLI.password,
@@ -36,6 +36,13 @@ const Login = () => {
                 email: "",
                 password: "",
             })
+
+            if (result.data.userLogIn.success) {
+                window.location.href = "http://localhost:5173";
+            } else {
+                alert(result.data.userLogIn.message);
+            }
+
         } catch (error) {
             console.error("Login error: ", error.message);
         }
